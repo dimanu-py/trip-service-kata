@@ -7,7 +7,7 @@ from src.trip_service_kata.user_session import UserSession
 class TripService:
 
     def get_trips_by_user(self, user: User) -> list[Trip]:
-        logged_user = UserSession.get_instance().get_logged_user()
+        logged_user = self.logged_user()
         is_friend = False
         trip_list = []
         if logged_user:
@@ -20,3 +20,7 @@ class TripService:
           return trip_list
         else:
             raise UserNotLoggedInException()
+
+    @staticmethod
+    def logged_user() -> User:
+        return UserSession.get_instance().get_logged_user()
