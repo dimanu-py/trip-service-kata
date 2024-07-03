@@ -17,3 +17,6 @@ class User:
 
     def get_trips(self) -> list:
         return self.trips
+
+    def is_friend_of(self, other_user: "User") -> bool:
+        return other_user in self.friends
