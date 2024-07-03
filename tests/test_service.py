@@ -12,21 +12,21 @@ class SeamTripService(TripService):
         self.test_instance = test_instance
     
     def logged_user(self) -> User:
-        return self.test_instance.application_user
+        return self.test_instance.logged_user
 
 
 class TestTripService(unittest.TestCase):
     GUEST_USER = None
-    LOGGED_USER = User()
+    APPLICATION_USER = User()
     GENERIC_USER = User()
     GREECE = Trip()
 
     def setUp(self):
-        self.application_user = self.LOGGED_USER
+        self.logged_user = self.APPLICATION_USER
         self.trip_service = SeamTripService(self)
 
     def test_user_cannot_get_trips_if_is_not_logged_in(self) -> None:
-        self.application_user = self.GUEST_USER
+        self.logged_user = self.GUEST_USER
 
         with self.assertRaises(UserNotLoggedInException):
             self.trip_service.get_trips_by_user(self.GUEST_USER)
