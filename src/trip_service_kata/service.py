@@ -16,10 +16,14 @@ class TripService:
               is_friend = True
               break
           if is_friend:
-            trip_list = TripRepository.find_trips_by_user(user)
+            trip_list = self.find_trips_by(user)
           return trip_list
         else:
             raise UserNotLoggedInException()
+
+    @staticmethod
+    def find_trips_by(user: User) -> list[Trip]:
+        return TripRepository.find_trips_by_user(user)
 
     @staticmethod
     def logged_user() -> User:
