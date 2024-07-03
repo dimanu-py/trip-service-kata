@@ -1,8 +1,9 @@
 import unittest
+from unittest.mock import Mock
 
 from src.trip_service_kata.exceptions import UserNotLoggedInException
 from src.trip_service_kata.service import TripService
-from src.trip_service_kata.trip import Trip
+from src.trip_service_kata.trip import Trip, TripRepository
 from src.trip_service_kata.user import User
 from src.trip_service_kata.user_builder import UserBuilder
 
@@ -24,7 +25,8 @@ class TestTripService(unittest.TestCase):
 
     def setUp(self):
         self.logged_user = self.APPLICATION_USER
-        self.trip_service = TripService()
+        self.trip_repository = Mock(TripRepository)
+        self.trip_service = TripService(self.trip_repository)
 
     def test_user_cannot_get_trips_if_is_not_logged_in(self) -> None:
         self.logged_user = self.GUEST_USER
@@ -46,6 +48,7 @@ class TestTripService(unittest.TestCase):
                   .friends_with([self.logged_user])
                   .with_trips_to([self.GREECE])
                   .build())
+        self.trip_repository.find_trips_by_user.return_value = friend.trips
 
         trips = self.trip_service.get_trips_by_user(friend, self.logged_user)
 

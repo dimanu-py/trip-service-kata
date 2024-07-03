@@ -13,7 +13,7 @@ class TripService:
     def get_trips_by_user(self, user: User, logged_user: User) -> list[Trip]:
         self.validate(logged_user)
 
-        return self.find_trips_by(user) if user.is_friend_of(logged_user) else self.NO_TRIPS
+        return self.trip_repository.find_trips_by_user(user) if user.is_friend_of(logged_user) else self.NO_TRIPS
 
     @staticmethod
     def validate(logged_user: User) -> None:
