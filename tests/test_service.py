@@ -39,7 +39,7 @@ class TestTripService(unittest.TestCase):
                   .friends_with([self.logged_user])
                   .with_trips_to([self.GREECE])
                   .build())
-        self.trip_repository.find_trips_by_user.return_value = friend.trips
+        self.trip_repository.find_trips_by.return_value = friend.trips
 
         trips = self.trip_service.get_trips_by_user(friend, self.logged_user)
 
