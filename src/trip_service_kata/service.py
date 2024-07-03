@@ -19,7 +19,3 @@ class TripService:
     def validate(logged_user: User) -> None:
         if not logged_user:
             raise UserNotLoggedInException()
-
-    @staticmethod
-    def find_trips_by(user: User) -> list[Trip]:
-        return TripRepository.find_trips_by_user(user)

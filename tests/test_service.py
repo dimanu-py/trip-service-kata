@@ -8,15 +8,6 @@ from src.trip_service_kata.user import User
 from src.trip_service_kata.user_builder import UserBuilder
 
 
-class SeamTripService(TripService):
-
-    def __init__(self, test_instance):
-        self.test_instance = test_instance
-
-    def find_trips_by(self, user: User) -> list[Trip]:
-        return user.trips
-
-
 class TestTripService(unittest.TestCase):
     GUEST_USER = None
     APPLICATION_USER = User()
