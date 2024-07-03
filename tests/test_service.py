@@ -14,6 +14,9 @@ class SeamTripService(TripService):
     def logged_user(self) -> User:
         return self.test_instance.logged_user
 
+    def find_trips_by(self, user: User) -> list[Trip]:
+        return user.trips
+
 
 class TestTripService(unittest.TestCase):
     GUEST_USER = None
@@ -39,3 +42,12 @@ class TestTripService(unittest.TestCase):
         trips = self.trip_service.get_trips_by_user(stranger)
 
         self.assertEqual(trips, [])
+
+    def test_user_gets_trips_of_friend(self) -> None:
+        friend = User()
+        friend.add_friend(self.logged_user)
+        friend.add_trip(self.GREECE)
+
+        trips = self.trip_service.get_trips_by_user(friend)
+
+        self.assertEqual(trips, [self.GREECE])
