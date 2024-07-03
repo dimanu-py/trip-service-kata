@@ -6,9 +6,6 @@ class User:
         self.trips: list = []
         self.friends: list[User] = []
 
-    def get_friends(self) -> list["User"]:
-        return self.friends
-
     def add_friend(self, user: "User") -> None:
         self.friends.append(user)
 
