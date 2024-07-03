@@ -5,16 +5,16 @@ from src.trip_service_kata.user_session import UserSession
 
 
 class TripService:
+    NO_TRIPS = []
 
     def get_trips_by_user(self, user: User) -> list[Trip]:
         logged_user = self.logged_user()
         if not logged_user:
             raise UserNotLoggedInException()
 
-        trip_list = []
         if user.is_friend_of(logged_user):
-            trip_list = self.find_trips_by(user)
-        return trip_list
+            return self.find_trips_by(user)
+        return self.NO_TRIPS
 
     @staticmethod
     def find_trips_by(user: User) -> list[Trip]:
