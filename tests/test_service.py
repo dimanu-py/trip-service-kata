@@ -33,14 +33,14 @@ class TestTripService(unittest.TestCase):
         self.logged_user = self.GUEST_USER
 
         with self.assertRaises(UserNotLoggedInException):
-            self.trip_service.get_trips_by_user(self.GUEST_USER)
+            self.trip_service.get_trips_by_user(self.GUEST_USER, self.logged_user)
 
     def test_user_gets_no_trips_if_is_not_friend(self) -> None:
         stranger = (UserBuilder()
                     .friends_with([self.GENERIC_USER])
                     .build())
 
-        trips = self.trip_service.get_trips_by_user(stranger)
+        trips = self.trip_service.get_trips_by_user(stranger, self.logged_user)
 
         self.assertEqual(trips, [])
 
@@ -50,6 +50,6 @@ class TestTripService(unittest.TestCase):
                   .with_trips_to([self.GREECE])
                   .build())
 
-        trips = self.trip_service.get_trips_by_user(friend)
+        trips = self.trip_service.get_trips_by_user(friend, self.logged_user)
 
         self.assertEqual(trips, [self.GREECE])

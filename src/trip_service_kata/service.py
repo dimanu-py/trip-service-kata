@@ -7,7 +7,7 @@ from src.trip_service_kata.user_session import UserSession
 class TripService:
     NO_TRIPS = []
 
-    def get_trips_by_user(self, user: User, logged_in_user: User = None) -> list[Trip]:
+    def get_trips_by_user(self, user: User, logged_in_user: User) -> list[Trip]:
         logged_user = self.logged_user() if not logged_in_user else logged_in_user
         self.validate(logged_user)
 
