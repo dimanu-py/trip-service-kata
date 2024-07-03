@@ -33,11 +33,9 @@ the real collaborators.
 
 ![img.png](assets/img.png)
 
-
 ## Objective
 
 The main objective is to learn how to test legacy code using steams, mocks and stubs when needed.
-
 
 
 ## Configuration
@@ -74,6 +72,11 @@ pdm run pytest
 ```
 
 ## Learnings
+
+- How to test legacy code where external dependencies can't be mocked using seams
+- Refactor legacy code step by step to improve readability and maintainability
+- Identify code smells such as feature envy
+- Parallel change to introduce changes in the code without breaking the tests
 
 ### Visit my GitHub profile to see all solved katas 🚀
 
