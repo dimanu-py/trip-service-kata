@@ -7,8 +7,8 @@ from src.trip_service_kata.user_session import UserSession
 class TripService:
     NO_TRIPS = []
 
-    def get_trips_by_user(self, user: User) -> list[Trip]:
-        logged_user = self.logged_user()
+    def get_trips_by_user(self, user: User, logged_in_user: User = None) -> list[Trip]:
+        logged_user = self.logged_user() if not logged_in_user else logged_in_user
         self.validate(logged_user)
 
         return self.find_trips_by(user) if user.is_friend_of(logged_user) else self.NO_TRIPS
