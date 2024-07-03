@@ -7,6 +7,9 @@ from src.trip_service_kata.user_session import UserSession
 class TripService:
     NO_TRIPS = []
 
+    def __init__(self, trip_repository: TripRepository = None) -> None:
+        self.trip_repository = trip_repository
+
     def get_trips_by_user(self, user: User, logged_user: User) -> list[Trip]:
         self.validate(logged_user)
 
