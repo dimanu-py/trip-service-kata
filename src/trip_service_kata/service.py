@@ -9,10 +9,14 @@ class TripService:
 
     def get_trips_by_user(self, user: User) -> list[Trip]:
         logged_user = self.logged_user()
-        if not logged_user:
-            raise UserNotLoggedInException()
+        self.validate(logged_user)
 
         return self.find_trips_by(user) if user.is_friend_of(logged_user) else self.NO_TRIPS
+
+    @staticmethod
+    def validate(logged_user: User) -> None:
+        if not logged_user:
+            raise UserNotLoggedInException()
 
     @staticmethod
     def find_trips_by(user: User) -> list[Trip]:
