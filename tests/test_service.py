@@ -11,9 +11,6 @@ class SeamTripService(TripService):
 
     def __init__(self, test_instance):
         self.test_instance = test_instance
-    
-    def logged_user(self) -> User:
-        return self.test_instance.logged_user
 
     def find_trips_by(self, user: User) -> list[Trip]:
         return user.trips
@@ -27,7 +24,7 @@ class TestTripService(unittest.TestCase):
 
     def setUp(self):
         self.logged_user = self.APPLICATION_USER
-        self.trip_service = SeamTripService(self)
+        self.trip_service = TripService()
 
     def test_user_cannot_get_trips_if_is_not_logged_in(self) -> None:
         self.logged_user = self.GUEST_USER
