@@ -15,11 +15,15 @@ class SeamTripService(TripService):
 
 
 class TestTripService(unittest.TestCase):
+    GUEST_USER = None
+    LOGGED_USER = User()
 
     def setUp(self):
-        self.application_user = None
+        self.application_user = self.LOGGED_USER
         self.trip_service = SeamTripService(self)
 
     def test_user_cannot_get_trips_if_is_not_logged_in(self) -> None:
+        self.application_user = self.GUEST_USER
+
         with self.assertRaises(UserNotLoggedInException):
-            self.trip_service.get_trips_by_user(None)
+            self.trip_service.get_trips_by_user(self.GUEST_USER)
