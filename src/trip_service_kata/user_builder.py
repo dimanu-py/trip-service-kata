@@ -8,12 +8,12 @@ class UserBuilder:
         self.trips: list[Trip] = []
         self.friends: list[User] = []
 
-    def friends_with(self, friends: list[User]) -> "UserBuilder":
-        self.friends = friends
+    def friends_with(self, *friends: list[User]) -> "UserBuilder":
+        self.friends = list(friends)
         return self
 
-    def with_trips_to(self, trips: list[Trip]) -> "UserBuilder":
-        self.trips = trips
+    def with_trips_to(self, *trips: Trip) -> "UserBuilder":
+        self.trips = list(trips)
         return self
 
     def build(self) -> User:
